@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="bn" className="dark h-full notranslate" translate="no" suppressHydrationWarning>
+    <html lang="bn" className="dark notranslate" translate="no" suppressHydrationWarning>
       <head>
         <meta name="google" content="notranslate" />
       </head>

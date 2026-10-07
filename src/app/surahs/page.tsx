@@ -55,7 +55,7 @@ export default function SurahsPage() {
   }, [searchQuery, activeFilter, selectedSurahIds]);
 
   return (
-    <div className="pb-28 pt-4">
+    <div className="pb-36 sm:pb-44 pt-4">
       
       {/* Header Title Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
