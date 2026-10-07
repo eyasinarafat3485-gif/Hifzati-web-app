@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-bangla: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-arabic: 'Amiri', 'Traditional Arabic', serif;
+  --bg-dark: #061914;
+  --bg-card-dark: #0a251e;
+  --primary-emerald: #059669;
+  --accent-gold: #d97706;
+}
+
+body {
+  font-family: var(--font-bangla);
+  background-color: #04120e;
+  color: #f0fdf4;
+  overflow-x: hidden;
+}
+
+.font-arabic {
+  font-family: var(--font-arabic);
+}
+
+.font-bangla {
+  font-family: var(--font-bangla);
+}
+
+/* Islamic Geometric Pattern Background Overlay */
+.islamic-bg-pattern {
+  background-color: #04130f;
+  background-image: radial-gradient(#059669 0.75px, transparent 0.75px), radial-gradient(#10b981 0.75px, #04130f 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  opacity: 0.95;
+}
+
+/* Ornate Star Badge for Surah Number */
+.surah-badge {
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030f0c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #055038;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+  background: rgba(10, 37, 30, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.glass-card-active {
+  background: rgba(6, 78, 59, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+/* Gold glow effect */
+.gold-glow {
+  box-shadow: 0 0 25px rgba(217, 119, 6, 0.3);
+}
