@@ -181,7 +181,7 @@ export default function SetupPage() {
                   if (errorMsg) setErrorMsg('');
                 }}
                 placeholder={placeholderText}
-                className="w-full bg-emerald-950/80 border border-emerald-700/60 rounded-xl px-4 py-3.5 text-emerald-100 placeholder-emerald-600/60 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all font-medium text-base"
+                className="w-full bg-emerald-950/80 border border-emerald-700/60 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3.5 text-emerald-100 placeholder-emerald-600/60 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all font-medium text-xs sm:text-sm md:text-base placeholder:text-xs sm:placeholder:text-sm md:placeholder:text-base"
               />
             </div>
             {errorMsg && (

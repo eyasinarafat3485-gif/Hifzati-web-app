@@ -80,7 +80,7 @@ export default function SurahsPage() {
           <div className="flex-1">
             <div className="flex items-center justify-between text-xs font-semibold text-emerald-200 mb-1">
               <span>
-                {totalMemorizedCount} / 114 ({toBanglaNumber(totalMemorizedCount)} / {toBanglaNumber(114)})
+                {toBanglaNumber(totalMemorizedCount)} / {toBanglaNumber(114)}
               </span>
               <span className="text-amber-400 font-bold">{toBanglaNumber(percentageCompleted)}%</span>
             </div>
@@ -123,62 +123,67 @@ export default function SurahsPage() {
         {/* Filters and Action Buttons */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           
-          {/* Filters Horizontal Scrollable Pill Bar */}
-          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 scrollbar-none flex-nowrap shrink-0 w-full sm:w-auto -mx-1 px-1">
-            <button
-              onClick={() => setActiveFilter('all')}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                activeFilter === 'all'
-                  ? 'bg-amber-500 text-slate-950 shadow-md'
-                  : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
-              }`}
-            >
-              সব সূরা ({toBanglaNumber(114)})
-            </button>
+          {/* Filters Horizontal Scrollable Pill Bar with Scroll Indicator Fade */}
+          <div className="relative flex-1 min-w-0">
+            {/* Gradient right fade overlay to indicate scrollable content */}
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#04120e] to-transparent pointer-events-none z-10 sm:hidden" />
 
-            <button
-              onClick={() => setActiveFilter('memorized')}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                activeFilter === 'memorized'
-                  ? 'bg-amber-500 text-slate-950 shadow-md'
-                  : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
-              }`}
-            >
-              মুখস্থ ({toBanglaNumber(totalMemorizedCount)})
-            </button>
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 scrollbar-none flex-nowrap scroll-smooth touch-pan-x pr-6 sm:pr-0">
+              <button
+                onClick={() => setActiveFilter('all')}
+                className={`px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
+                  activeFilter === 'all'
+                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-900/30'
+                    : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
+                }`}
+              >
+                সব সূরা ({toBanglaNumber(114)})
+              </button>
 
-            <button
-              onClick={() => setActiveFilter('remaining')}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                activeFilter === 'remaining'
-                  ? 'bg-amber-500 text-slate-950 shadow-md'
-                  : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
-              }`}
-            >
-              বাকি ({toBanglaNumber(114 - totalMemorizedCount)})
-            </button>
+              <button
+                onClick={() => setActiveFilter('memorized')}
+                className={`px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
+                  activeFilter === 'memorized'
+                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-900/30'
+                    : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
+                }`}
+              >
+                মুখস্থ ({toBanglaNumber(totalMemorizedCount)})
+              </button>
 
-            <button
-              onClick={() => setActiveFilter('makkah')}
-              className={`px-3 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                activeFilter === 'makkah'
-                  ? 'bg-amber-500 text-slate-950 shadow-md'
-                  : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
-              }`}
-            >
-              মাক্কী
-            </button>
+              <button
+                onClick={() => setActiveFilter('remaining')}
+                className={`px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
+                  activeFilter === 'remaining'
+                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-900/30'
+                    : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
+                }`}
+              >
+                বাকি ({toBanglaNumber(114 - totalMemorizedCount)})
+              </button>
 
-            <button
-              onClick={() => setActiveFilter('madinah')}
-              className={`px-3 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                activeFilter === 'madinah'
-                  ? 'bg-amber-500 text-slate-950 shadow-md'
-                  : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
-              }`}
-            >
-              মাদানী
-            </button>
+              <button
+                onClick={() => setActiveFilter('makkah')}
+                className={`px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
+                  activeFilter === 'makkah'
+                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-900/30'
+                    : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
+                }`}
+              >
+                মাক্কী
+              </button>
+
+              <button
+                onClick={() => setActiveFilter('madinah')}
+                className={`px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
+                  activeFilter === 'madinah'
+                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-900/30'
+                    : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
+                }`}
+              >
+                মাদানী
+              </button>
+            </div>
           </div>
 
           {/* "সব নির্বাচন করুন" & "সব মুছে ফেলুন" Action Buttons */}
@@ -226,30 +231,30 @@ export default function SurahsPage() {
         </div>
       )}
 
-      {/* Sticky Bottom Floating Action Bar */}
-      <div className="fixed bottom-4 left-4 right-4 max-w-2xl mx-auto z-40">
-        <div className="bg-[#041a14]/95 backdrop-blur-xl border-2 border-emerald-500/40 rounded-2xl p-4 shadow-2xl flex items-center justify-between gap-4">
+      {/* Sticky Bottom Floating Action Bar - Compact & sleek for Mobile */}
+      <div className="fixed bottom-2 sm:bottom-4 left-2.5 right-2.5 sm:left-4 sm:right-4 max-w-2xl mx-auto z-40">
+        <div className="bg-[#041a14]/95 backdrop-blur-xl border border-emerald-500/50 rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-2xl flex items-center justify-between gap-2 sm:gap-4">
           
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-emerald-900/80 text-amber-400 flex items-center justify-center font-bold text-sm border border-emerald-600/40">
-              {selectedSurahIds.length}
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-900/80 text-amber-400 flex items-center justify-center font-bold text-xs sm:text-sm border border-emerald-600/40 shrink-0">
+              {toBanglaNumber(selectedSurahIds.length)}
             </div>
-            <div>
-              <p className="text-xs font-semibold text-emerald-100">
-                {selectedSurahIds.length} / 114 ({toBanglaNumber(selectedSurahIds.length)} / {toBanglaNumber(114)}) সূরা নির্বাচিত
+            <div className="min-w-0">
+              <p className="text-[11px] sm:text-xs font-bold text-emerald-100 whitespace-nowrap truncate">
+                {toBanglaNumber(selectedSurahIds.length)} / ১১৪ সূরা নির্বাচিত
               </p>
-              <p className="text-[10px] text-amber-400 font-bold">
-                অগ্রগতি: {percentageCompleted}% ({toBanglaNumber(percentageCompleted)}%) সম্পন্ন
+              <p className="text-[10px] sm:text-xs text-amber-400 font-bold whitespace-nowrap truncate">
+                অগ্রগতি: {toBanglaNumber(percentageCompleted)}% সম্পন্ন
               </p>
             </div>
           </div>
 
           <Link
             href="/result"
-            className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold px-5 py-2.5 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer text-sm sm:text-base"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer text-xs sm:text-sm whitespace-nowrap shrink-0"
           >
             <span>ফলাফল দেখুন</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </Link>
 
         </div>

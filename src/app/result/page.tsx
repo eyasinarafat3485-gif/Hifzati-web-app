@@ -50,22 +50,22 @@ export default function ResultPage() {
     <div className="py-6 sm:py-10 max-w-5xl mx-auto px-4">
       
       {/* Navigation & Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between gap-2 mb-6">
         <Link
           href="/surahs"
-          className="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-200 font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-emerald-400 hover:text-emerald-200 font-medium transition-colors whitespace-nowrap truncate"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>সূরা নির্বাচন পেজে ফিরে যান</span>
+          <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+          <span className="truncate">সূরা নির্বাচন পেজে ফিরে যান</span>
         </Link>
 
-        {/* Save Progress Button Header Action */}
+        {/* Save Progress Button Header Action - 1 line on mobile */}
         <button
           onClick={saveProgress}
-          className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg border border-emerald-400/30 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-[11px] sm:text-sm px-2.5 py-2 sm:px-4 sm:py-2.5 rounded-xl shadow-lg border border-emerald-400/30 transition-all hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap shrink-0"
         >
-          <Save className="w-4 h-4 text-amber-300" />
-          <span>অগ্রগতি সংরক্ষণ করুন</span>
+          <Save className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 shrink-0" />
+          <span className="whitespace-nowrap">অগ্রগতি সংরক্ষণ করুন</span>
         </button>
       </div>
 
@@ -114,10 +114,10 @@ export default function ResultPage() {
           <div>
             <Link
               href="/surahs"
-              className="inline-flex items-center gap-2 bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-200 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-200 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap"
             >
-              <Edit3 className="w-4 h-4 text-amber-400" />
-              <span>অগ্রগতির তথ্য পরিবর্তন করুন</span>
+              <Edit3 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0" />
+              <span>অগ্রগতি পরিবর্তন</span>
             </Link>
           </div>
 
@@ -171,14 +171,22 @@ export default function ResultPage() {
           </div>
         </div>
 
-        {/* Action Button: "অগ্রগতি সংরক্ষণ করুন" */}
-        <div className="mt-8 pt-6 border-t border-emerald-800/40 flex flex-wrap items-center justify-center gap-4">
+        {/* Action Buttons: 1 single row on mobile */}
+        <div className="mt-8 pt-6 border-t border-emerald-800/40 flex flex-row items-center justify-between gap-2.5 w-full max-w-md mx-auto">
+          <Link
+            href="/surahs"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/50 text-emerald-200 px-3 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all active:scale-95 cursor-pointer whitespace-nowrap"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0" />
+            <span>ফিরে যান</span>
+          </Link>
+
           <button
             onClick={saveProgress}
-            className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-base px-8 py-3.5 rounded-2xl shadow-xl shadow-amber-950/40 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs sm:text-sm px-3.5 py-2.5 sm:py-3 rounded-xl shadow-lg transition-all active:scale-95 cursor-pointer whitespace-nowrap"
           >
-            <Save className="w-5 h-5" />
-            <span>অগ্রগতি সংরক্ষণ করুন</span>
+            <Save className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span>সংরক্ষণ করুন</span>
           </button>
         </div>
 
@@ -199,41 +207,41 @@ export default function ResultPage() {
       </div>
 
       {/* Selected Surahs Section: "আমার মুখস্থ করা সূরা" */}
-      <div className="mt-12 glass-card rounded-3xl p-6 sm:p-8 border border-emerald-800/40">
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-emerald-800/40">
-          <h2 className="text-xl sm:text-2xl font-bold text-emerald-50 flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-amber-400" />
+      <div className="mt-8 glass-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-emerald-800/40">
+        <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-emerald-800/40">
+          <h2 className="text-xs sm:text-lg font-bold text-emerald-50 flex items-center gap-1.5 whitespace-nowrap">
+            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0" />
             <span>আমার মুখস্থ করা সূরা ({toBanglaNumber(selectedSurahsList.length)})</span>
           </h2>
 
           <Link
             href="/surahs"
-            className="text-xs font-semibold text-amber-400 hover:underline"
+            className="text-[11px] sm:text-xs font-semibold text-amber-400 hover:underline whitespace-nowrap shrink-0"
           >
-            + আরও নির্বাচন করুন
+            + নির্বাচন করুন
           </Link>
         </div>
 
         {/* Selected Surahs Grid displaying number, arabicName, banglaName, ayahCount, revelationType */}
         {selectedSurahsList.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {selectedSurahsList.map((surah) => (
               <div
                 key={surah.number}
-                className="bg-emerald-950/80 border border-emerald-800/50 rounded-2xl p-4 flex items-center justify-between hover:border-emerald-500/40 transition-all"
+                className="bg-emerald-950/80 border border-emerald-800/50 rounded-xl sm:rounded-2xl p-3 flex items-center justify-between hover:border-emerald-500/40 transition-all"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   {/* Surah Number */}
-                  <div className="w-10 h-10 rounded-xl bg-emerald-900 text-amber-400 flex items-center justify-center font-bold text-sm border border-emerald-700/50">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-900 text-amber-400 flex items-center justify-center font-bold text-xs sm:text-sm border border-emerald-700/50 shrink-0">
                     {toBanglaNumber(surah.number)}
                   </div>
 
                   {/* Bangla Name, Ayah Count & Revelation Type */}
                   <div>
-                    <h3 className="font-bold text-sm sm:text-base text-emerald-100">
+                    <h3 className="font-bold text-xs sm:text-base text-emerald-100">
                       {surah.banglaName}
                     </h3>
-                    <p className="text-xs text-emerald-300/70 mt-0.5">
+                    <p className="text-[11px] text-emerald-300/70 mt-0.5">
                       {toBanglaNumber(surah.ayahCount || surah.totalAyahs)} আয়াত •{' '}
                       <span className="text-amber-400/90 font-medium">
                         {surah.revelationType || (surah.type === 'makkah' ? 'মাক্কী' : 'মাদানী')}
@@ -243,16 +251,16 @@ export default function ResultPage() {
                 </div>
 
                 {/* Arabic Name */}
-                <span className="font-arabic text-xl sm:text-2xl text-amber-400 font-bold">
+                <span className="font-arabic text-lg sm:text-2xl text-amber-400 font-bold shrink-0">
                   {surah.arabicName}
                 </span>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 text-emerald-400/70 text-sm">
+          <div className="text-center py-6 text-emerald-400/70 text-xs sm:text-sm">
             এখনো কোনো সূরা নির্বাচন করা হয়নি।{" "}
-            <Link href="/surahs" className="text-amber-400 font-bold underline">
+            <Link href="/surahs" className="text-amber-400 font-bold underline ml-1">
               সূরা নির্বাচন শুরু করুন
             </Link>
           </div>

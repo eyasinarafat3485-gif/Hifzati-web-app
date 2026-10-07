@@ -350,41 +350,45 @@ export default function ShareCard() {
 
       </div>
 
-      {/* Action Buttons: PNG Download, Share, Copy Link */}
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+      {/* Action Buttons: 2 Clean Lines Layout for all mobile devices */}
+      <div className="mt-6 w-full max-w-[420px] space-y-2">
+        {/* Line 1: PNG Download Primary CTA */}
         <button
           onClick={handleDownloadPNG}
           disabled={isDownloading}
-          className="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold px-6 py-3 rounded-xl shadow-lg shadow-amber-950/40 transition-all hover:scale-105 active:scale-95 disabled:opacity-50 cursor-pointer text-sm"
+          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs sm:text-sm py-2.5 sm:py-3 px-4 rounded-xl shadow-lg shadow-amber-950/40 transition-all active:scale-95 disabled:opacity-50 cursor-pointer whitespace-nowrap"
         >
-          <Download className="w-4 h-4" />
+          <Download className="w-4 h-4 shrink-0" />
           <span>{isDownloading ? 'PNG তৈরি হচ্ছে...' : 'PNG ডাউনলোড করুন'}</span>
         </button>
 
-        <button
-          onClick={handleShare}
-          className="flex items-center gap-2 bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-600 hover:to-teal-700 text-emerald-100 font-bold px-5 py-3 rounded-xl border border-emerald-500/40 shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer text-sm"
-        >
-          <Share2 className="w-4 h-4 text-amber-400" />
-          <span>শেয়ার করুন</span>
-        </button>
+        {/* Line 2: Share & Copy Link Side by Side in 1 row */}
+        <div className="flex flex-row items-center gap-2 w-full">
+          <button
+            onClick={handleShare}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-emerald-800 to-teal-800 hover:from-emerald-700 hover:to-teal-700 text-emerald-100 font-bold text-xs sm:text-sm py-2.5 px-2.5 rounded-xl border border-emerald-500/40 shadow-md transition-all active:scale-95 cursor-pointer whitespace-nowrap"
+          >
+            <Share2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>শেয়ার করুন</span>
+          </button>
 
-        <button
-          onClick={handleCopyLink}
-          className="flex items-center gap-2 bg-emerald-950 hover:bg-emerald-900 text-emerald-200 font-semibold px-4 py-3 rounded-xl border border-emerald-700/50 transition-all hover:scale-105 active:scale-95 cursor-pointer text-sm"
-        >
-          {copiedLink ? (
-            <>
-              <Check className="w-4 h-4 text-emerald-400" />
-              <span>লিংক কপি হয়েছে!</span>
-            </>
-          ) : (
-            <>
-              <Copy className="w-4 h-4 text-emerald-400" />
-              <span>লিংক কপি করুন</span>
-            </>
-          )}
-        </button>
+          <button
+            onClick={handleCopyLink}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-200 font-semibold text-xs sm:text-sm py-2.5 px-2.5 rounded-xl border border-emerald-700/50 transition-all active:scale-95 cursor-pointer whitespace-nowrap"
+          >
+            {copiedLink ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>কপি হয়েছে!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>লিংক কপি</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
     </div>

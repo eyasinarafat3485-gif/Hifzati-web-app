@@ -15,6 +15,19 @@ body {
   background-color: #04120e;
   color: #f0fdf4;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+/* Native Web App UI Feel Improvements */
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.select-none {
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .font-arabic {
