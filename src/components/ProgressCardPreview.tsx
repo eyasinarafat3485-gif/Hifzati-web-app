@@ -15,7 +15,7 @@ export default function ProgressCardPreview() {
   const { name, image, userName, userAvatar, totalMemorizedCount, totalAyahsMemorized, percentageCompleted, memorizedSurahs, selectedSurahIds } = useHifz();
 
   const currentDate = '৭ অক্টোবর, ২০২৬';
-  const displayName = (name || userName || '').trim() || 'মোঃ আইয়াসিন আরাফাত';
+  const displayName = (name || userName || '').trim() || 'মো: ইয়াছিন আরাফাত';
   const displayImage = image || userAvatar;
   const activeSurahNumbers = memorizedSurahs || selectedSurahIds || [];
 
@@ -123,7 +123,9 @@ export default function ProgressCardPreview() {
           </div>
 
           <div>
-            <h3 className="text-xl font-bold text-amber-300 leading-tight">{displayName}</h3>
+            <h3 className={`text-xl font-bold leading-tight ${
+              !name.trim() && !userName.trim() ? 'text-amber-300/60 blur-[0.4px] italic' : 'text-amber-300'
+            }`}>{displayName}</h3>
             <p className="text-xs text-emerald-300/80 mt-0.5">
               কুরআনুল কারীম মুখস্থকারী শিক্ষার্থী
             </p>

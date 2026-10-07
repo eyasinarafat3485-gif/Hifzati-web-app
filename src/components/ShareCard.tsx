@@ -109,7 +109,7 @@ export default function ShareCard() {
   } = useHifz();
 
   const currentDate = '৭ অক্টোবর, ২০২৬';
-  const displayName = (name || userName || '').trim() || 'মোঃ আইয়াসিন আরাফাত';
+  const displayName = (name || userName || '').trim() || 'মো: ইয়াছিন আরাফাত';
   const displayImage = image || userAvatar;
   const activeSurahNumbers = memorizedSurahs || selectedSurahIds || [];
 
@@ -260,7 +260,9 @@ export default function ShareCard() {
             </div>
 
             <div>
-              <h3 className={`text-xl font-extrabold leading-tight ${themeConfig.textPrimary}`}>
+              <h3 className={`text-xl font-extrabold leading-tight ${themeConfig.textPrimary} ${
+                !name.trim() && !userName.trim() ? 'opacity-65 blur-[0.4px] italic' : ''
+              }`}>
                 {displayName}
               </h3>
               <p className={`text-xs font-medium mt-0.5 ${themeConfig.textSecondary}`}>

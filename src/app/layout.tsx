@@ -33,6 +33,7 @@ export const viewport = {
 };
 
 import SmoothScroll from '@/components/SmoothScroll';
+import BackgroundAudio from '@/components/BackgroundAudio';
 
 export default function RootLayout({
   children,
@@ -51,6 +52,7 @@ export default function RootLayout({
       >
         <SmoothScroll>
           <HifzProvider>
+            <BackgroundAudio />
             <Suspense fallback={<div className="h-16 w-full bg-[#04120e]" />}>
               <Navbar />
             </Suspense>

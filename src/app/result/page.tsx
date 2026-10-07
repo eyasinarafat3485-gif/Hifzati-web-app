@@ -1,17 +1,19 @@
 'use client';
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useHifz } from '@/context/HifzContext';
 import { SURAHS_DATA, toBanglaNumber } from '@/data/surahs';
 import ShareCard from '@/components/ShareCard';
+import ConfirmModal from '@/components/ConfirmModal';
 import confetti from 'canvas-confetti';
 import { motion } from 'framer-motion';
 import { Save, ArrowLeft, Edit3, Sparkles, BookOpen, RotateCcw } from 'lucide-react';
 import BrandName from '@/components/BrandName';
 
 export default function ResultPage() {
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const {
     name,
     image,
@@ -23,7 +25,7 @@ export default function ResultPage() {
     resetAll,
   } = useHifz();
 
-  const displayName = name.trim() || 'মোঃ আইয়াসিন আরাফাত';
+  const displayName = name.trim() || 'মো: ইয়াছিন আরাফাত';
 
   // Trigger celebration confetti on page load if user has memorized at least 1 surah
   useEffect(() => {
@@ -105,7 +107,9 @@ export default function ResultPage() {
             <h1 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-emerald-50 leading-tight whitespace-nowrap">
               আমার কুরআন যাত্রা
             </h1>
-            <p className="text-lg sm:text-xl font-bold text-amber-300 mt-1">
+            <p className={`text-lg sm:text-xl font-bold mt-1 transition-all ${
+              !name.trim() ? 'text-amber-300/60 blur-[0.4px] italic' : 'text-amber-300'
+            }`}>
               {displayName}
             </p>
           </div>
@@ -270,17 +274,20 @@ export default function ResultPage() {
       {/* Reset CTA */}
       <div className="mt-10 text-center">
         <button
-          onClick={() => {
-            if (confirm("আপনি কি সমস্ত ডাটা রিসেট করতে চান?")) {
-              resetAll();
-            }
-          }}
+          onClick={() => setIsResetModalOpen(true)}
           className="inline-flex items-center gap-2 text-xs text-rose-400/80 hover:text-rose-300 bg-rose-950/30 border border-rose-900/40 px-4 py-2 rounded-xl transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>ডাটা রিসেট করুন</span>
         </button>
       </div>
+
+      {/* Professional Reset Confirm Modal */}
+      <ConfirmModal
+        isOpen={isResetModalOpen}
+        onClose={() => setIsResetModalOpen(false)}
+        onConfirm={resetAll}
+      />
 
     </div>
   );
