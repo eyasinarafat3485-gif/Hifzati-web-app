@@ -50,6 +50,7 @@ function SurahDetailContent({ params }: { params: Promise<{ id: string }> }) {
   // Audio state
   const [playingAyahIndex, setPlayingAyahIndex] = useState<number | null>(null);
   const [isPlayingAll, setIsPlayingAll] = useState<boolean>(false);
+  const [isPlayingBismillah, setIsPlayingBismillah] = useState<boolean>(false);
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 
   // Auto pause Surah recitation if background audio is activated
@@ -60,6 +61,7 @@ function SurahDetailContent({ params }: { params: Promise<{ id: string }> }) {
       }
       setPlayingAyahIndex(null);
       setIsPlayingAll(false);
+      setIsPlayingBismillah(false);
     };
 
     if (typeof window !== 'undefined') {
@@ -163,6 +165,10 @@ function SurahDetailContent({ params }: { params: Promise<{ id: string }> }) {
   const togglePlayAyah = (index: number, audioUrl?: string) => {
     if (!audioUrl) return;
 
+    if (isPlayingBismillah) {
+      setIsPlayingBismillah(false);
+    }
+
     // Trigger auto-mute for background audio when Surah audio starts
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('pause-bg-audio'));
@@ -199,6 +205,42 @@ function SurahDetailContent({ params }: { params: Promise<{ id: string }> }) {
     };
   };
 
+  // Play Bismillah audio
+  const togglePlayBismillah = () => {
+    const bismillahAudioUrl = 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3';
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('pause-bg-audio'));
+    }
+
+    if (isPlayingBismillah && currentAudio) {
+      if (currentAudio.paused) {
+        currentAudio.play();
+      } else {
+        currentAudio.pause();
+        setIsPlayingBismillah(false);
+      }
+      return;
+    }
+
+    if (currentAudio) {
+      currentAudio.pause();
+    }
+
+    setPlayingAyahIndex(null);
+    setIsPlayingAll(false);
+
+    const audio = new Audio(bismillahAudioUrl);
+    setCurrentAudio(audio);
+    setIsPlayingBismillah(true);
+
+    audio.play().catch(() => setIsPlayingBismillah(false));
+
+    audio.onended = () => {
+      setIsPlayingBismillah(false);
+    };
+  };
+
   // Play full surah audio
   const togglePlayFullSurah = () => {
     if (isPlayingAll) {
@@ -207,9 +249,11 @@ function SurahDetailContent({ params }: { params: Promise<{ id: string }> }) {
       }
       setIsPlayingAll(false);
       setPlayingAyahIndex(null);
+      setIsPlayingBismillah(false);
     } else {
       if (ayahs.length > 0) {
         setIsPlayingAll(true);
+        setIsPlayingBismillah(false);
         togglePlayAyah(0, ayahs[0].audioUrl);
       }
     }
@@ -314,29 +358,8 @@ function SurahDetailContent({ params }: { params: Promise<{ id: string }> }) {
             )}
           </div>
 
-          {/* Control Actions (Play Full Surah & Toggle Memorized Status) */}
+          {/* Control Actions (Toggle Memorized Status) */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <button
-              onClick={togglePlayFullSurah}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-lg active:scale-95 ${
-                isPlayingAll
-                  ? 'bg-amber-500 text-slate-950 shadow-amber-900/40'
-                  : 'bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white shadow-emerald-950/60'
-              }`}
-            >
-              {isPlayingAll ? (
-                <>
-                  <Pause className="w-4 h-4 fill-current" />
-                  <span>অডিও বন্ধ করুন</span>
-                </>
-              ) : (
-                <>
-                  <Play className="w-4 h-4 fill-current" />
-                  <span>পূর্ণ সূরা শুনুন</span>
-                </>
-              )}
-            </button>
-
             <button
               onClick={() => toggleSurah(surahMeta.number)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm border transition-all cursor-pointer active:scale-95 ${
@@ -402,14 +425,46 @@ function SurahDetailContent({ params }: { params: Promise<{ id: string }> }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center my-6 py-4 px-6 glass-card bg-emerald-950/40 border border-amber-500/20 rounded-2xl"
+          className={`glass-card rounded-2xl p-4 sm:p-6 transition-all duration-300 border my-6 ${
+            isPlayingBismillah
+              ? 'border-amber-400/80 bg-emerald-950/90 shadow-xl shadow-emerald-950/90 ring-1 ring-amber-400/40'
+              : 'border-amber-500/20 bg-emerald-950/40'
+          }`}
         >
-          <span className="font-arabic text-2xl sm:text-4xl text-amber-400 font-bold block leading-relaxed">
-            بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-          </span>
-          <span className="text-xs text-emerald-300/60 mt-1 block">
-            পরম করুণাময় ও অসীম দয়ালু আল্লাহর নামে শুরু করছি
-          </span>
+          {/* Bismillah Top Header Toolbar */}
+          <div className="flex items-center justify-between gap-2 border-b border-emerald-800/30 pb-3 mb-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm text-amber-400/90 font-bold px-1">
+                বিসমিল্লাহির রাহমানির রাহিম
+              </span>
+            </div>
+
+            {/* Bismillah Audio Play Button */}
+            <button
+              onClick={togglePlayBismillah}
+              className={`p-2 rounded-xl transition-all cursor-pointer ${
+                isPlayingBismillah
+                  ? 'bg-amber-500 text-slate-950 shadow-md'
+                  : 'bg-emerald-900/60 text-emerald-300 hover:text-amber-400 hover:bg-emerald-800/70 border border-emerald-700/40'
+              }`}
+              title={isPlayingBismillah ? 'থামান' : 'বিসমিল্লাহ শুনুন'}
+            >
+              {isPlayingBismillah ? (
+                <Pause className="w-4 h-4 fill-current" />
+              ) : (
+                <Volume2 className="w-4 h-4" />
+              )}
+            </button>
+          </div>
+
+          <div className="text-center my-2">
+            <span className="font-arabic text-2xl sm:text-4xl text-amber-400 font-bold block leading-relaxed pr-2">
+              بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+            </span>
+            <span className="text-xs sm:text-sm text-emerald-300/70 mt-2 block">
+              পরম করুণাময় ও অসীম দয়ালু আল্লাহর নামে শুরু করছি
+            </span>
+          </div>
         </motion.div>
       )}
 
