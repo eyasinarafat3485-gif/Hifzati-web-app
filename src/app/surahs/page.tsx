@@ -164,24 +164,24 @@ export default function SurahsPage() {
 
               <button
                 onClick={() => setActiveFilter('makkah')}
-                className={`px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
+                className={`px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
                   activeFilter === 'makkah'
                     ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-900/30'
                     : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
                 }`}
               >
-                মাক্কী
+                মাক্কী ({toBanglaNumber(86)})
               </button>
 
               <button
                 onClick={() => setActiveFilter('madinah')}
-                className={`px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
+                className={`px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold whitespace-nowrap shrink-0 transition-all cursor-pointer active:scale-95 ${
                   activeFilter === 'madinah'
                     ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-900/30'
                     : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 hover:bg-emerald-900/60'
                 }`}
               >
-                মাদানী
+                মাদানী ({toBanglaNumber(28)})
               </button>
             </div>
           </div>

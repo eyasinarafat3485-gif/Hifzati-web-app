@@ -92,6 +92,24 @@ export default function BackgroundAudio() {
       setShowModal(false);
     };
 
+    // Auto pause background audio when Surah recitation audio plays
+    const handlePauseBgAudio = () => {
+      if (playerRef.current) {
+        try {
+          if (playerRef.current.pauseVideo) playerRef.current.pauseVideo();
+          if (playerRef.current.mute) playerRef.current.mute();
+        } catch (e) {}
+      }
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.muted = true;
+      }
+      setIsPlaying(false);
+      setIsMuted(true);
+    };
+
+    window.addEventListener('pause-bg-audio', handlePauseBgAudio);
+
     const events = ['scroll', 'wheel', 'touchmove'];
 
     events.forEach((evt) => {
@@ -100,6 +118,7 @@ export default function BackgroundAudio() {
 
     return () => {
       active = false;
+      window.removeEventListener('pause-bg-audio', handlePauseBgAudio);
       events.forEach((evt) => {
         window.removeEventListener(evt, handleFirstGesture);
       });
@@ -114,6 +133,11 @@ export default function BackgroundAudio() {
   }, []);
 
   const playAudioNow = () => {
+    // First pause any Surah audio that might be playing
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('pause-surah-audio'));
+    }
+
     if (playerRef.current) {
       try {
         if (playerRef.current.unMute) playerRef.current.unMute();
@@ -146,14 +170,17 @@ export default function BackgroundAudio() {
     if (isMuted || !isPlaying) {
       playAudioNow();
     } else {
-      if (playerRef.current && playerRef.current.mute) {
+      if (playerRef.current) {
         try {
-          playerRef.current.mute();
+          if (playerRef.current.pauseVideo) playerRef.current.pauseVideo();
+          if (playerRef.current.mute) playerRef.current.mute();
         } catch (e) {}
       }
       if (audioRef.current) {
+        audioRef.current.pause();
         audioRef.current.muted = true;
       }
+      setIsPlaying(false);
       setIsMuted(true);
     }
   };
