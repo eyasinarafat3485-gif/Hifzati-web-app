@@ -246,18 +246,55 @@ export default function BackgroundAudio() {
         )}
       </AnimatePresence>
 
-      {/* Floating Sound Toggle Button */}
-      <button
-        onClick={toggleSound}
-        title={isMuted ? 'সাউন্ড চালু করুন' : 'সাউন্ড বন্ধ করুন'}
-        className="fixed bottom-24 right-4 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-emerald-950/90 border border-emerald-500/40 text-amber-400 flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all cursor-pointer backdrop-blur-md select-none"
-      >
-        {isMuted || !isPlaying ? (
-          <VolumeX className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400/60" />
-        ) : (
-          <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 animate-pulse" />
-        )}
-      </button>
+      {/* Floating Sound Toggle Button with Ripple & Tooltip Animation */}
+      <div className="fixed bottom-24 right-4 z-50 flex items-center gap-2 select-none">
+        {/* Animated Tooltip Badge when muted to invite clicks */}
+        <AnimatePresence>
+          {(isMuted || !isPlaying) && (
+            <motion.div
+              initial={{ opacity: 0, x: 10, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 10, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              className="hidden sm:flex items-center gap-1.5 bg-emerald-950/95 border border-amber-500/40 px-3 py-1.5 rounded-full text-xs font-bold text-amber-300 shadow-xl backdrop-blur-md"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+              <span>সাউন্ড চালু করুন</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Button Wrapper with Ring Effect */}
+        <div className="relative">
+          {/* Animated Pulsing Ring when muted */}
+          {(isMuted || !isPlaying) && (
+            <span className="absolute inset-0 rounded-full bg-amber-400/40 animate-ping pointer-events-none" />
+          )}
+
+          {/* Glowing Aura Ring when playing */}
+          {isPlaying && !isMuted && (
+            <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-400/40 via-emerald-400/40 to-teal-400/40 blur-sm animate-pulse pointer-events-none" />
+          )}
+
+          <motion.button
+            onClick={toggleSound}
+            whileHover={{ scale: 1.12 }}
+            whileTap={{ scale: 0.9 }}
+            title={isMuted ? 'ব্যাকগ্রাউন্ড সাউন্ড চালু করুন' : 'ব্যাকগ্রাউন্ড সাউন্ড বন্ধ করুন'}
+            className={`relative w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md border transition-all cursor-pointer ${
+              isMuted || !isPlaying
+                ? 'bg-emerald-950/95 border-amber-500/60 text-amber-400 shadow-amber-950/50'
+                : 'bg-gradient-to-br from-emerald-900 to-teal-950 border-emerald-400/60 text-amber-300 shadow-emerald-950/80 ring-2 ring-emerald-500/30'
+            }`}
+          >
+            {isMuted || !isPlaying ? (
+              <VolumeX className="w-5 h-5 text-amber-400 animate-pulse" />
+            ) : (
+              <Volume2 className="w-5 h-5 text-amber-300 animate-bounce" />
+            )}
+          </motion.button>
+        </div>
+      </div>
     </>
   );
 }
