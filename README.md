@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="public/logo.png" alt="Al-Hifzati Logo" width="100" height="100" style="border-radius: 20px; box-shadow: 0 10px 25px rgba(4, 47, 34, 0.5);" />
+  <img src="public/preview.jpg" alt="Al-Hifzati Web Application Preview" width="720" style="max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 15px 35px rgba(4, 47, 34, 0.4);" />
 
   # 📖 Al-Hifzati (হিফজতি)
   ### *আমার কুরআন হিফজের পথচলা — A Modern Quran Memorization Companion*
