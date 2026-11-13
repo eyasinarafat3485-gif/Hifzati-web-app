@@ -1,8 +1,9 @@
 <div align="center">
+
   # 📖 Al-Hifzati (হিফজতি)
   ### *আমার কুরআন হিফজের পথচলা — A Modern Quran Memorization Companion*
 
- <a href="https://al-hifzati.vercel.app/" target="_blank">
+  <a href="https://al-hifzati.vercel.app/" target="_blank">
   <img src="public/preview.jpg" alt="Al-Hifzati Web Application Preview" width="350" style="max-width: 100%; height: auto; border-radius: 14px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);" />
 </a>
 
