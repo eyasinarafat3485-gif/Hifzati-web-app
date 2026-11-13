@@ -1,9 +1,9 @@
 <div align="center">
 
-  <img src="public/preview.jpg" alt="Al-Hifzati Web Application Preview" width="350" style="max-width: 100%; height: auto; border-radius: 14px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);" />
-
   # 📖 Al-Hifzati (হিফজতি)
   ### *আমার কুরআন হিফজের পথচলা — A Modern Quran Memorization Companion*
+
+  <img src="public/preview.jpg" alt="Al-Hifzati Web Application Preview" width="350" style="max-width: 100%; height: auto; border-radius: 14px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);" />
 
   <p align="center">
     <strong>A high-performance, full-stack web application designed to track, celebrate, and share Quran memorization progress with spiritual elegance and modern web engineering.</strong>
